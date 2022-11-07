@@ -1,0 +1,196 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../img/background.jpg);
+    background-attachment: fixed;
+    margin-top: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+
+.dropdown-toggle{
+    padding-right: 1em;
+}
+
+.dropdown-menu{
+    visibility: hidden;
+    transition-delay: 1s;
+    transition-property: visibility;
+    margin-top: 14px;
+    background-color: white;
+    border-radius: 1px;
+    border: solid 1px;
+    width: 7em;
+    position: fixed;
+    z-index: 2;
+    list-style-type: none;
+    display: initial;
+}
+
+.profile-menu:hover .dropdown-menu, .dropdown-menu:hover{
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.dropdown-menu li a:hover{
+    color: rgba(255,255,255,0.75);
+}
+
+.dropdown-menu li:hover{
+    background-color: rgba(0,0,255,0.1);
+}
+
+.profile-menu > a {
+    font-weight: bold;
+    color: darkslategrey;
+}
+
+#text-color-select {
+    height: auto;
+}
+
+textarea#text {
+    min-height: 10em!important;
+}
+
+.rating-arrow{
+    margin: 0 1em;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+}
+
+.rating-arrow:hover {
+    cursor: pointer;
+}
+
+.rating-up {
+    transform: rotate(180deg);
+}
+
+#toTopBtn {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+#toTopBtn:hover {
+    background-color: rgb(85 85 85 / 25%); // Add a dark-grey background on hover
+}
+
+[data-more-checker^="card-read-more"] {
+    opacity: 0;
+    position: absolute;
+}
+[data-more-checker^="card-read-more"]:checked ~ .card-body {
+    max-height: none;
+}
+[data-more-checker^="card-read-more"]:checked ~ .card-body .card-bottom {
+    opacity: 0;
+    transition: 0.3s;
+}
+[data-more-checker^="card-read-more"] ~ .card-read-more-button:before  {
+    content: "Развернуть »";
+}
+[data-more-checker^="card-read-more"]:checked ~ .card-read-more-button:before {
+    content: "Свернуть «";
+}
+
+.card-read-more-button {
+    cursor: pointer;
+    display: inline-block;
+    color: #777;
+    text-decoration: underline;
+}
+
+.post:not(:first-child) {
+    margin-top: 2rem;
+}
+
+.comment {
+    margin-top: 2rem;
+}
+
+.hasComments+.comment {
+    margin-top: initial;
+}
+
+.hasPosts+.post {
+    margin-top: initial;
+}
+
+.hasComments {
+    padding: 1em 0;
+    font-weight: bold;
+}
+
+.hasPosts {
+    padding: 1em 0;
+    font-weight: bold;
+}
+
+.post .card-body{
+    max-height: 300px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: content-box;
+    min-height: 200px;
+}
+
+.comment .card-body{
+    box-sizing: content-box;
+    min-height: 250px;
+    white-space: pre-wrap;
+}
+
+.post .card-body .card-bottom {
+    position: absolute; /* Если прыгает - можно попробовать sticky */
+    bottom: 0;
+    background: linear-gradient(
+            to bottom,
+            rgb(255 255 255 / 0%),
+            rgb(255 255 255)90%);
+    width: 100%;
+    height: 60px;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.morePosts:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.moreComments:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.row.authors .card{
+    min-height: 6em;
+}
+
+.row.authors .card-body{
+    margin-top: 3em;
+}
+
+.row.authors{
+    margin-bottom: 1em;
+}
+
+.moreAuthors:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
