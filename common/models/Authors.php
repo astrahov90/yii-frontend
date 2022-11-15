@@ -9,7 +9,7 @@ class Authors extends User
         return ['id',
             'authorName' => 'username',
             'description',
-            'created_at'=>function(){return date("d.m.Y H:i:s", $this->created_at);},
+            'created_at'=>function(){return date("d.m.Y", $this->created_at);},
             'iconPath',
             'posts_count'=>function(){return $this->getPosts()->count();},
         ];

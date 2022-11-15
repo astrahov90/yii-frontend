@@ -24,8 +24,8 @@ function getPostElement(elem,curIndex, avatarField="") {
         "                                <div class='card-title'>\n" +
         "                                    <div class='container-fluid'>\n" +
         "                                        <div class='row'>\n" +
-        "                                            <div class='col-4 fw-bold'>"+elem.title+"</div>\n" +
-        "                                            <div class='col-3 offset-5'> Рейтинг: <img class='rating-arrow rating-down' src='/img/down-arrow-red.svg'><span class='rating-count'>" + elem.likes_count+ "</span><img class='rating-arrow rating-up' src='/img/up-arrow-green.svg'></div>\n" +
+        "                                            <div class='col-9 fw-bold'>"+elem.title+"</div>\n" +
+        "                                            <div class='col-3'> Рейтинг: <img class='rating-arrow rating-down' src='/img/down-arrow-red.svg'><span class='rating-count'>" + elem.likes_count+ "</span><img class='rating-arrow rating-up' src='/img/up-arrow-green.svg'></div>\n" +
         "                                        </div>\n" +
         "                                    </div>\n" +
         "                                </div>\n" +

@@ -31,7 +31,7 @@ function getUserElement(elem) {
 
 function loadUsers() {
     let curCount = $(".row.authors").length;
-    $.get("/api/authors"+(location.search?location.search+"&":"?")+"page="+(curCount+1)).done(function (data) {
+    $.get("/api/authors"+(location.search?location.search+"&":"?")+"offset="+(curCount+1)).done(function (data) {
 
         data.authors.forEach(function (elem, key) {
             let newElement = getUserElement(elem);
