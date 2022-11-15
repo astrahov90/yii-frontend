@@ -3,14 +3,14 @@ version: '3.2'
 services:
 
   frontend:
-    build: frontend
+    build: frontend/.
     ports:
       - 20080:80
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
-      - ./:/app
+      - ./:/var/www/html
 
   #backend:
   #  build: backend

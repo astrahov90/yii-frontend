@@ -15,8 +15,7 @@ $this->title = 'О проекте';
                 <ul>
                     <li>HTML+JS+JQUERY</li>
                     <li>BOOTSTRAP</li>
-                    <li>PHP+YII2 (backend)</li>
-                    <li>REACTJS (frontend)</li>
+                    <li>YII2</li>
                 </ul>
             </div>
         </div>

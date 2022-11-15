@@ -15,7 +15,7 @@ class CommentsController extends ActiveController
 
     public $modelClass = 'common\models\Comments';
     public $serializer = [
-        'class' => 'common\serializers\listSerializer',
+        'class' => 'common\serializers\ListSerializer',
         'collectionEnvelope' => 'comments',
     ];
 

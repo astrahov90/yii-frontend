@@ -194,3 +194,7 @@ textarea#text {
     font-weight: bold;
     cursor: pointer;
 }
+
+.avatar {
+    max-width: 100px;
+}

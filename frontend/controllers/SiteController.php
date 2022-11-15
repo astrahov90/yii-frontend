@@ -2,14 +2,11 @@
 
 namespace frontend\controllers;
 
-use common\models\Posts;
-use common\models\User;
 use frontend\models\NewCommentForm;
 use frontend\models\NewPostForm;
 use frontend\models\ProfileForm;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
-use MongoDB\Driver\Exception\AuthenticationException;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -20,8 +17,6 @@ use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
-use yii\web\UnauthorizedHttpException;
 use yii\web\UploadedFile;
 
 /**

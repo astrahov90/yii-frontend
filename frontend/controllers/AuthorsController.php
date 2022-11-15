@@ -14,7 +14,7 @@ class AuthorsController extends ActiveController
 
     public $modelClass = 'common\models\Authors';
     public $serializer = [
-        'class' => 'common\serializers\listSerializer',
+        'class' => 'common\serializers\ListSerializer',
         'collectionEnvelope' => 'authors',
     ];
 

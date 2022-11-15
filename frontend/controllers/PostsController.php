@@ -2,12 +2,8 @@
 
 namespace frontend\controllers;
 
-use common\models\Comments;
-use common\models\Posts;
 use common\models\PostsLikes;
-use common\serializers\PostSerializer;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\rest\ActiveController;
 use yii\web\BadRequestHttpException;
@@ -19,7 +15,7 @@ class PostsController extends ActiveController
 
     public $modelClass = 'common\models\Posts';
     public $serializer = [
-        'class' => 'common\serializers\listSerializer',
+        'class' => 'common\serializers\ListSerializer',
         'collectionEnvelope' => 'posts',
     ];
 
