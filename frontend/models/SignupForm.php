@@ -2,9 +2,9 @@
 
 namespace frontend\models;
 
+use common\models\User;
 use Yii;
 use yii\base\Model;
-use common\models\User;
 use yii\web\UploadedFile;
 
 /**
@@ -43,7 +43,7 @@ class SignupForm extends Model
             ['description', 'required'],
             ['description', 'string', 'min' => 1, 'max' => 1024],
 
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'checkExtensionByMimeType'=>false,],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'checkExtensionByMimeType' => false,],
         ];
     }
 
@@ -68,7 +68,7 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
@@ -79,10 +79,9 @@ class SignupForm extends Model
 
         $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
 
-        if ($this->imageFile)
-        {
+        if ($this->imageFile) {
             $file_path = '/uploads/' . uniqid(rand(), false) . '.' . $this->imageFile->extension;
-            $this->imageFile->saveAs(\Yii::getAlias('@webroot').$file_path);
+            $this->imageFile->saveAs(\Yii::getAlias('@webroot') . $file_path);
             $user->iconPath = $file_path;
         }
 

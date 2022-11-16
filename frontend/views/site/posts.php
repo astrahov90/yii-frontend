@@ -20,7 +20,7 @@ $this->title = 'Пикомемсы - ваш сайт развлечений';
     morePostsBtn.hide();
 
     $(".card-read-more-button").click(function (e) {
-        if ($("#"+$(this).attr("for")).is(":not(:checked)")){
+        if ($("#" + $(this).attr("for")).is(":not(:checked)")) {
             scrollIntoViewIfNeeded($(e.target));
         }
     });
@@ -37,9 +37,11 @@ $this->title = 'Пикомемсы - ваш сайт развлечений';
                     window.innerHeight || document.documentElement.clientHeight
                 )) {
                 //scroll down
-                $("html,body").animate({scrollTop: targetFullPosition -
-                    (window.innerHeight || document.documentElement.clientHeight)
-                    + $target.height() + 15}
+                $("html,body").animate({
+                        scrollTop: targetFullPosition -
+                        (window.innerHeight || document.documentElement.clientHeight)
+                        + $target.height() + 15
+                    }
                 );
             }
         }

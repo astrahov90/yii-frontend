@@ -51,7 +51,7 @@ return [
                         'POST <post_id:\d+>/like' => 'like',
                         'POST <post_id:\d+>/dislike' => 'dislike',
                         'GET <post_id:\d+>/getRating' => 'get-rating',
-                        ]
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -59,9 +59,9 @@ return [
                     'prefix' => 'api/',
                     'extraPatterns' => [
                         'GET me' => 'me',
-                        ]
+                    ]
                 ],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'comments','prefix' => 'api/posts/<post_id:\d+>'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'comments', 'prefix' => 'api/posts/<post_id:\d+>'],
                 'posts/<post_id:\d+>/comments/?' => 'site/post-comments',
                 'authors/<author_id:\d+>/posts' => 'site/author-posts',
                 'authors' => 'site/authors',

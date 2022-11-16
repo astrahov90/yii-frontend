@@ -22,22 +22,32 @@ $this->title = 'Пикомемсы - комментарии к посту';
         </div>
         <label class="moreComments">Еще...</label>
         <?php if (Yii::$app->user->isGuest): ?>
-            <span>Для добавления комментария необходимо </span><a class="login-link" href="/site/login">авторизоваться</a>
+            <span>Для добавления комментария необходимо </span><a class="login-link"
+                                                                  href="/site/login">авторизоваться</a>
         <?php else: ?>
             <div class="mt-2">
-                <?php $form = ActiveForm::begin(['id' => 'form-newcomment', 'action' => '/api/posts/'.$post_id.'/comments']); ?>
-                <?= Html::label('Новый комментарий', 'text',['class' => 'form-label fw-bold']) ?>
-                <?= Html::tag('div','',['class' => 'clearfix']) ?>
+                <?php $form = ActiveForm::begin(['id' => 'form-newcomment', 'action' => '/api/posts/' . $post_id . '/comments']); ?>
+                <?= Html::label('Новый комментарий', 'text', ['class' => 'form-label fw-bold']) ?>
+                <?= Html::tag('div', '', ['class' => 'clearfix']) ?>
 
                 <div class="btn-group mt-2 mb-2" role="group">
-                    <button type="button" class="btn btn-outline-primary bbcode" id="text-bold" title="Полужирный"><span style="font-weight: bold">B</span></button>
-                    <button type="button" class="btn btn-outline-primary bbcode" id="text-italic" title="Курсив"><span style="font-style: italic">I</span></button>
-                    <button type="button" class="btn btn-outline-primary bbcode" id="text-underline" title="Подчеркнутый"><span style="text-decoration: underline">U</span></button>
-                    <button type="button" class="btn btn-outline-primary bbcode" id="text-line-through" title="Зачеркнутый"><span style="text-decoration: line-through">S</span></button>
-                    <button type="button" class="btn btn-outline-primary bbcode" id="text-quote" title="Цитирование"><span style="font-weight: bold">""</span></button>
-                    <button type="button" class="btn btn-outline-primary bbcode" id="text-url" title="Гиперссылка">url</button>
-                    <button type="button" class="btn btn-outline-primary bbcode" id="text-img" title="Изображение">img</button>
-                    <button type="button" class="btn btn-outline-primary bbcode" id="text-color" title="Цвет текста">color</button>
+                    <button type="button" class="btn btn-outline-primary bbcode" id="text-bold" title="Полужирный"><span
+                                style="font-weight: bold">B</span></button>
+                    <button type="button" class="btn btn-outline-primary bbcode" id="text-italic" title="Курсив"><span
+                                style="font-style: italic">I</span></button>
+                    <button type="button" class="btn btn-outline-primary bbcode" id="text-underline"
+                            title="Подчеркнутый"><span style="text-decoration: underline">U</span></button>
+                    <button type="button" class="btn btn-outline-primary bbcode" id="text-line-through"
+                            title="Зачеркнутый"><span style="text-decoration: line-through">S</span></button>
+                    <button type="button" class="btn btn-outline-primary bbcode" id="text-quote" title="Цитирование">
+                        <span style="font-weight: bold">""</span></button>
+                    <button type="button" class="btn btn-outline-primary bbcode" id="text-url" title="Гиперссылка">url
+                    </button>
+                    <button type="button" class="btn btn-outline-primary bbcode" id="text-img" title="Изображение">img
+                    </button>
+                    <button type="button" class="btn btn-outline-primary bbcode" id="text-color" title="Цвет текста">
+                        color
+                    </button>
                     <input type="color" class="btn btn-outline-primary" id="text-color-select" title="Цвет">
                 </div>
                 <?= $form->field($model, 'body')->textarea(['id' => 'text', 'placeholder' => 'Введите текст комментария'])->label(false) ?>
@@ -47,12 +57,12 @@ $this->title = 'Пикомемсы - комментарии к посту';
                     <?= Html::Button('Предпросмотр', ['class' => 'btn btn-primary', 'id' => 'preview']) ?>
                 </div>
                 <div id="preview-data">
-                    <?= Html::label('Предварительный просмотр','preview-data') ?>
-                    <?= Html::tag('div',Html::tag('pre','Предпросмотр',['class' => 'card-body w-100']),['class' => 'card']) ?>
+                    <?= Html::label('Предварительный просмотр', 'preview-data') ?>
+                    <?= Html::tag('div', Html::tag('pre', 'Предпросмотр', ['class' => 'card-body w-100']), ['class' => 'card']) ?>
                 </div>
                 <?php ActiveForm::end(); ?>
             </div>
-        <?php endif?>
+        <?php endif ?>
     </div>
 </section>
 
@@ -71,7 +81,7 @@ $this->title = 'Пикомемсы - комментарии к посту';
     let textField = $("#text");
 
     $(".card-read-more-button").click(function (e) {
-        if ($("#"+$(this).attr("for")).is(":not(:checked)")){
+        if ($("#" + $(this).attr("for")).is(":not(:checked)")) {
             scrollIntoViewIfNeeded($(e.target));
         }
     });
@@ -100,44 +110,60 @@ $this->title = 'Пикомемсы - комментарии к посту';
         let url;
         let color;
 
-        switch ($(this).attr('id')){
-            case "text-bold": tag = 'b'; break;
-            case "text-italic": tag = 'i'; break;
-            case "text-underline": tag = 'u'; break;
-            case "text-line-through": tag = 's'; break;
-            case "text-quote": tag = 'quote'; break;
-            case "text-url": tag = 'url'; break;
-            case "text-img": tag = 'img'; break;
-            case "text-color": tag = 'color'; break;
+        switch ($(this).attr('id')) {
+            case "text-bold":
+                tag = 'b';
+                break;
+            case "text-italic":
+                tag = 'i';
+                break;
+            case "text-underline":
+                tag = 'u';
+                break;
+            case "text-line-through":
+                tag = 's';
+                break;
+            case "text-quote":
+                tag = 'quote';
+                break;
+            case "text-url":
+                tag = 'url';
+                break;
+            case "text-img":
+                tag = 'img';
+                break;
+            case "text-color":
+                tag = 'color';
+                break;
         }
 
-        if (tag==="url"){
+        if (tag === "url") {
             url = prompt("Введите url");
-            if (!url){
+            if (!url) {
                 return false;
             }
         }
 
-        if (tag==="img"){
+        if (tag === "img") {
             url = prompt("Введите ссылку на изображение");
-            if (!url){
+            if (!url) {
                 return false;
             }
             curSelectionStart = curSelectionEnd;
         }
 
-        if (tag==="color"){
+        if (tag === "color") {
             color = $("#text-color-select").val();
         }
 
-        let curSelection = "["+tag+(curSelectionStart!==curSelectionEnd&&url?"="+url:"")+(color?"='"+color+"'":"")+"]" + (curSelectionStart===curSelectionEnd&&url?url:curText.slice(curSelectionStart, curSelectionEnd)) + "[/"+tag+"]";
+        let curSelection = "[" + tag + (curSelectionStart !== curSelectionEnd && url ? "=" + url : "") + (color ? "='" + color + "'" : "") + "]" + (curSelectionStart === curSelectionEnd && url ? url : curText.slice(curSelectionStart, curSelectionEnd)) + "[/" + tag + "]";
 
-        curText = curText.slice(0,curSelectionStart) + curSelection + curText.slice(curSelectionEnd);
+        curText = curText.slice(0, curSelectionStart) + curSelection + curText.slice(curSelectionEnd);
 
         textField.val(curText);
     });
 
-    $("#form-newcomment").submit(function(event) {
+    $("#form-newcomment").submit(function (event) {
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -145,8 +171,8 @@ $this->title = 'Пикомемсы - комментарии к посту';
         let formData = $(this).serialize();
         let action = $(this).attr('action');
 
-        $.post(action, formData).done(function(data) {
-            document.location.href="/posts/"+data.post_id+"/comments";
+        $.post(action, formData).done(function (data) {
+            document.location.href = "/posts/" + data.post_id + "/comments";
         });
 
         return false;

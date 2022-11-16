@@ -60,9 +60,9 @@ class VerifyEmailCest
         $I->see('Logout (test.test)', 'form button[type=submit]');
 
         $I->seeRecord('common\models\User', [
-           'username' => 'test.test',
-           'email' => 'test@mail.com',
-           'status' => \common\models\User::STATUS_ACTIVE
+            'username' => 'test.test',
+            'email' => 'test@mail.com',
+            'status' => \common\models\User::STATUS_ACTIVE
         ]);
     }
 }

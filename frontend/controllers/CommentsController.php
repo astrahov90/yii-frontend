@@ -19,7 +19,7 @@ class CommentsController extends ActiveController
         'collectionEnvelope' => 'comments',
     ];
 
-    const PAGESIZE = 5;
+    const PAGE_SIZE = 5;
 
     public function behaviors()
     {
@@ -60,14 +60,13 @@ class CommentsController extends ActiveController
     {
         $actions = parent::actions();
 
-        $actions['index']['prepareDataProvider'] = function($action)
-        {
-            $page = floor(Yii::$app->getRequest()->getQueryParam('offset')/self::PAGESIZE)??0;
+        $actions['index']['prepareDataProvider'] = function ($action) {
+            $page = floor(Yii::$app->getRequest()->getQueryParam('offset') / self::PAGE_SIZE) ?? 0;
 
             return new ActiveDataProvider([
                 'query' => Comments::find()->where(['post_id' => \Yii::$app->getRequest()->getQueryParam('post_id')]),
                 'pagination' => [
-                    'pageSize' => self::PAGESIZE,
+                    'pageSize' => self::PAGE_SIZE,
                     'page' => $page,
                 ]
             ]);

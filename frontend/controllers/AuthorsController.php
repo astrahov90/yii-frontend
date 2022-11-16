@@ -12,13 +12,12 @@ use yii\web\UnauthorizedHttpException;
 class AuthorsController extends ActiveController
 {
 
+    const PAGE_SIZE = 5;
     public $modelClass = 'common\models\Authors';
     public $serializer = [
         'class' => 'common\serializers\ListSerializer',
         'collectionEnvelope' => 'authors',
     ];
-
-    const PAGESIZE = 5;
 
     public function behaviors()
     {
@@ -57,12 +56,12 @@ class AuthorsController extends ActiveController
 
     public function actions()
     {
-        $page = floor(Yii::$app->getRequest()->getQueryParam('offset')/self::PAGESIZE)??0;
+        $page = floor(Yii::$app->getRequest()->getQueryParam('offset') / self::PAGE_SIZE) ?? 0;
 
         $actions = parent::actions();
 
         $actions['index']['pagination'] = [
-            'pageSize' => self::PAGESIZE,
+            'pageSize' => self::PAGE_SIZE,
             'page' => $page,
         ];
 
@@ -71,7 +70,7 @@ class AuthorsController extends ActiveController
 
     function actionMe()
     {
-        $currentUser = Authors::findOne(['id'=>Yii::$app->user->id]);
+        $currentUser = Authors::findOne(['id' => Yii::$app->user->id]);
 
         return (new ($this->serializer['class']))->serialize($currentUser);
     }

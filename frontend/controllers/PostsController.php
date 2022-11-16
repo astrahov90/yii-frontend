@@ -19,7 +19,7 @@ class PostsController extends ActiveController
         'collectionEnvelope' => 'posts',
     ];
 
-    const PAGESIZE = 5;
+    const PAGE_SIZE = 5;
 
     public function behaviors()
     {
@@ -58,19 +58,20 @@ class PostsController extends ActiveController
 
     public function actions()
     {
-        $page = floor(Yii::$app->getRequest()->getQueryParam('offset')/self::PAGESIZE)??0;
+        $page = floor(Yii::$app->getRequest()->getQueryParam('offset') / self::PAGE_SIZE) ?? 0;
 
         $actions = parent::actions();
 
         $actions['index']['pagination'] = [
-            'pageSize' => self::PAGESIZE,
+            'pageSize' => self::PAGE_SIZE,
             'page' => $page,
         ];
 
         return $actions;
     }
 
-    function actionLike($post_id){
+    function actionLike($post_id)
+    {
         $model = new PostsLikes();
 
         $post = [];
@@ -78,12 +79,10 @@ class PostsController extends ActiveController
         $post['post_id'] = $post_id;
         $post['rating'] = 1;
 
-        if($model->load($post,'') && $model->validate()){
-            try{
+        if ($model->load($post, '') && $model->validate()) {
+            try {
                 $model->save();
-            }
-            catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw New BadRequestHttpException('Рейтинг уже проставлен');
             }
             Yii::$app->response->statusCode = 200;
@@ -92,7 +91,8 @@ class PostsController extends ActiveController
 
     }
 
-    function actionDislike($post_id){
+    function actionDislike($post_id)
+    {
         $model = new PostsLikes();
 
         $post = [];
@@ -100,12 +100,10 @@ class PostsController extends ActiveController
         $post['post_id'] = $post_id;
         $post['rating'] = -1;
 
-        if($model->load($post,'') && $model->validate()){
-            try{
+        if ($model->load($post, '') && $model->validate()) {
+            try {
                 $model->save();
-            }
-            catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw New BadRequestHttpException('Рейтинг уже проставлен');
             }
             Yii::$app->response->statusCode = 200;
@@ -114,22 +112,20 @@ class PostsController extends ActiveController
 
     }
 
-    function actionGetRating($post_id){
+    function actionGetRating($post_id)
+    {
         $postRatingQuery = PostsLikes::find()
             ->select(['post_id', 'SUM(rating) AS likes_count'])
             ->groupBy('post_id')
             ->where(['post_id' => $post_id])
             ->asArray();
 
-        try
-        {
+        try {
             $postRating = $postRatingQuery->one();
             Yii::$app->response->statusCode = 200;
             return $postRating['likes_count'];
 
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw New BadRequestHttpException('Ошибка данных');
         }
 

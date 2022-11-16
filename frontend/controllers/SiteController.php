@@ -2,21 +2,21 @@
 
 namespace frontend\controllers;
 
+use common\models\LoginForm;
 use frontend\models\NewCommentForm;
 use frontend\models\NewPostForm;
+use frontend\models\PasswordResetRequestForm;
 use frontend\models\ProfileForm;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\ResetPasswordForm;
+use frontend\models\SignupForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
 use yii\web\UploadedFile;
 
 /**
@@ -265,7 +265,7 @@ class SiteController extends Controller
     {
         $model = new NewCommentForm();
 
-        return $this->render('postComments',array_merge(compact('post_id'), ['model' => $model]));
+        return $this->render('postComments', array_merge(compact('post_id'), ['model' => $model]));
     }
 
     public function actionProfile()
@@ -286,7 +286,7 @@ class SiteController extends Controller
 
     public function actionAuthorPosts($author_id)
     {
-        return $this->render('authorPosts',compact('author_id'));
+        return $this->render('authorPosts', compact('author_id'));
     }
 
 }

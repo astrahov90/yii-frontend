@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\models;
 
 use common\models\User;
@@ -14,16 +15,15 @@ class ProfileForm extends User
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'checkExtensionByMimeType'=>false,],
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'checkExtensionByMimeType' => false,],
         ];
     }
 
     public function upload()
     {
-        if ($this->validate())
-        {
+        if ($this->validate()) {
             $file_path = '/uploads/' . uniqid(rand(), false) . '.' . $this->imageFile->extension;
-            $this->imageFile->saveAs(\Yii::getAlias('@webroot').$file_path);
+            $this->imageFile->saveAs(\Yii::getAlias('@webroot') . $file_path);
             $this->iconPath = $file_path;
             return $this->save();
         }
