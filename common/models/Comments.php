@@ -15,7 +15,6 @@ use yii\helpers\HtmlPurifier;
  * @property string $body
  * @property integer $created_at
  */
-
 class Comments extends ActiveRecord
 {
     public function fields()
@@ -24,9 +23,15 @@ class Comments extends ActiveRecord
             'body',
             'post_id',
             'author_id',
-            'created_at'=>function(){return date("d.m.Y H:i:s", $this->created_at);},
-            'authorName'=>function(){return $this->getAuthors()->one()->username;},
-            'iconPath'=>function(){return $this->getAuthors()->one()->iconPath;},
+            'created_at' => function () {
+                return date("d.m.Y H:i:s", $this->created_at);
+            },
+            'authorName' => function () {
+                return $this->getAuthors()->one()->username;
+            },
+            'iconPath' => function () {
+                return $this->getAuthors()->one()->iconPath;
+            },
         ];
     }
 
@@ -34,9 +39,15 @@ class Comments extends ActiveRecord
     {
         return [
             ['body', 'required'],
-            ['created_at', 'default', 'value' => function(){return time();}],
-            ['author_id', 'default', 'value' => function(){return Yii::$app->user->id;}],
-            ['post_id', 'default', 'value' => function(){return Yii::$app->getRequest()->getQueryParam('post_id');}],
+            ['created_at', 'default', 'value' => function () {
+                return time();
+            }],
+            ['author_id', 'default', 'value' => function () {
+                return Yii::$app->user->id;
+            }],
+            ['post_id', 'default', 'value' => function () {
+                return Yii::$app->getRequest()->getQueryParam('post_id');
+            }],
         ];
     }
 

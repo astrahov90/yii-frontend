@@ -13,7 +13,6 @@ use yii\db\ActiveRecord;
  * @property integer $post_id
  * @property integer $rating
  */
-
 class PostsLikes extends ActiveRecord
 {
     public function rules()
