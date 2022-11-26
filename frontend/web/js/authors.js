@@ -53,6 +53,6 @@ function loadUsers() {
 function getUserInfo(authorId) {
     $.get("/api/authors/" + authorId).done(function (data) {
         let newElement = getUserElement(data);
-        $(".row.authors").append($(newElement));
+        $(".row.authors").replaceWith($(newElement));
     });
 }

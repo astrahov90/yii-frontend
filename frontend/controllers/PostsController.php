@@ -2,8 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\Posts;
 use common\models\PostsLikes;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\rest\ActiveController;
 use yii\web\BadRequestHttpException;
@@ -58,16 +61,66 @@ class PostsController extends ActiveController
 
     public function actions()
     {
-        $page = floor(Yii::$app->getRequest()->getQueryParam('offset') / self::PAGE_SIZE) ?? 0;
-
         $actions = parent::actions();
 
-        $actions['index']['pagination'] = [
-            'pageSize' => self::PAGE_SIZE,
-            'page' => $page,
-        ];
+        $actions['index']['prepareDataProvider'] = function ($action) {
+            $page = floor(Yii::$app->getRequest()->getQueryParam('offset') / self::PAGE_SIZE) ?? 0;
+
+            $newest = Yii::$app->request->getQueryParam('newest',false);
+            $authorId = Yii::$app->request->getQueryParam('author_id',null);
+
+            $query = null;
+
+            if ($authorId)
+            {
+                $query = Posts::find()->where(['author_id' => $authorId])
+                    ->orderBy('created_at DESC');
+            }
+            elseif($newest)
+            {
+                $query = Posts::find()->orderBy('created_at DESC');
+            }
+            else
+            {
+                $subquery = PostsLikes::find()
+                    ->select(new Expression('SUM(rating) as rating_sum'))
+                    ->addSelect('post_id')
+                    ->groupBy('post_id');
+                $query = Posts::find()->leftJoin(['posts_likes' => $subquery],'posts.id = posts_likes.post_id')
+                    ->select('posts.*')
+                    ->addSelect(new Expression('IFNULL(posts_likes.rating_sum,0) AS likes_count'))
+                    ->orderBy('likes_count DESC');
+            }
+
+            return new ActiveDataProvider([
+                'query' => $query,
+                'pagination' => [
+                    'pageSize' => self::PAGE_SIZE,
+                    'page' => $page,
+                ]
+            ]);
+        };
 
         return $actions;
+    }
+
+    function actionIndex(){
+        $newest = Yii::$app->request->getQueryParam('newest',false);
+        $authorId = Yii::$app->request->getQueryParam('author_id',null);
+
+        $result = null;
+        if ($authorId){
+            $result = Posts::findAll(['author_id'=> $authorId]);
+        }
+        else
+        {
+            if ($newest){
+                $result = Posts::find()->orderBy('created_at DESC')->all();
+            }
+        }
+
+        return (new ($this->serializer['class']))->serialize($result);
+
     }
 
     function actionLike($post_id)
