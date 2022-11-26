@@ -12,6 +12,8 @@ class ListSerializer extends Serializer
             return $input;
 
         $data = parent::serialize($input);
+        if (!is_array($data))
+            return $input;
 
         if (array_key_exists('_meta', $data)) {
             $meta = $data['_meta'];
