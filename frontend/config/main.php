@@ -9,7 +9,10 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'frontend\modules\admin\Bootstrap',
+    ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -39,7 +42,7 @@ return [
 
         'urlManager' => [
             'enablePrettyUrl' => true,
-            //'enableStrictParsing' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
@@ -76,4 +79,10 @@ return [
     'params' => $params,
     'language' => 'ru-RU',
     'name' => 'Пикомемсы - ваш сайт развлечений',
+    'modules' => [
+        'admin' => [
+            'basePath' => '@app/modules/admin',
+            'class' => 'frontend\modules\admin\Module',
+        ],
+    ],
 ];
